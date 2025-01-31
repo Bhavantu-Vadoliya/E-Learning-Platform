@@ -1,0 +1,19 @@
+/* Import Tailwind CSS */
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+/* Custom styles for spacing and typography */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    background-color: #1E3A8A;
+    color: white;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1E3A8A;
+}
+

@@ -1,0 +1,185 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnEase - Your AI-Powered E-Learning Platform</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+       
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header -->
+    <header class="bg-blue-600 p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-white text-3xl font-bold">LearnEase</h1>
+            <nav class="space-x-4 flex items-center">
+                <a href="#Home" class="text-white hover:text-gray-300">Home</a>
+                <a href="#Courses" class="text-white hover:text-gray-300">Courses</a>
+                <a href="#About" class="text-white hover:text-gray-300">About</a>
+                <a href="#Contact" class="text-white hover:text-gray-300">Contact</a>
+                <script>
+                    console.log("JavaScript is executing");
+
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        console.log("Anchor found:", anchor);
+
+                        anchor.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        });
+                    });
+                    });
+                </script>
+
+                <div class="relative group">
+                    <a href="#SignUp" class="text-white hover:text-gray-300">SignUp</a>
+                    <ul class="absolute hidden group-hover:block bg-blue-600 space-y-2 mt-2 p-2 rounded shadow-lg group-hover:visible">
+                        <li><a href="#SignUpTeacher" class="text-white hover:text-gray-300 block px-4 py-2">Teacher</a></li>
+                        <li><a href="#SignUpStudent" class="text-white hover:text-gray-300 block px-4 py-2">Student</a></li>
+                    </ul>
+                </div>
+                <div class="relative group">
+                    <a href="#SignIn" class="text-white hover:text-gray-300">SignIn</a>
+                    <ul class="absolute hidden group-hover:block bg-blue-600 space-y-2 mt-2 p-2 rounded shadow-lg group-hover:visible">
+                        <li><a href="#SignInTeacher" class="text-white hover:text-gray-300 block px-4 py-2">Teacher</a></li>
+                        <li><a href="#SignInStudent" class="text-white hover:text-gray-300 block px-4 py-2">Student</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="py-20 bg-blue-100" id="Home">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 text-center md:text-left space-y-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold">Unlock Your Potential with AI-Powered Learning</h2>
+                <p class="text-gray-700 text-lg">LearnEase offers personalized courses and quizzes that adapt to your learning style, helping you achieve your goals efficiently.</p>
+                <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex flex-col items-center">Get Started</a>
+            </div>
+            <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                <img src="{% static 'Media/img1.jpeg' %}" alt="E-Learning Illustration" class="max-w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-blue-100" id="Courses">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold">Interactive Courses</h3>
+                </div>
+                <p class="mt-4 text-gray-600">Engage in interactive courses designed by industry experts, tailored to your learning pace and style.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h.01M16 16h.01M20 4a2 2 0 01-2 2H6a2 2 0 01-2-2V4h16z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold">Adaptive Quizzes</h3>
+                </div>
+                <p class="mt-4 text-gray-600">Take quizzes that adapt based on your responses, making learning more effective and personalized.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8h18M3 16h18"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold">Progress Tracking</h3>
+                </div>
+                <p class="mt-4 text-gray-600">Track your learning journey, monitor your progress, and stay motivated to achieve your learning goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Courses Section -->
+    <section class="py-20 bg-blue-100" id="AvailableCourses">
+        <div class="max-w-7xl mx-auto text-center space-y-4">
+            <h2 class="text-3xl font-bold">Available Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 1</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 1.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 2</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 2.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 3</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enroll Section -->
+    <section class="py-12 bg-blue-200" id="EnrollNow">
+        <div class="max-w-7xl mx-auto text-center space-y-4 flex flex-col ">
+            <h2 class="text-3xl font-bold">Enroll Now</h2>
+            <p class="text-gray-600">Join our courses and start learning today!</p>
+            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Enroll Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="py-12 bg-blue-200" id="Contact">
+        <div class="max-w-7xl mx-auto text-center space-y-4">
+            <h2 class="text-3xl font-bold">Contact Us</h2>
+            <p class="text-gray-600">We would love to hear from you! Please fill out the form below:</p>
+            <form class="space-y-4">
+                <input type="text" placeholder="Your Name" class="w-full p-2 border border-gray-300 rounded">
+                <input type="email" placeholder="Your Email" class="w-full p-2 border border-gray-300 rounded">
+                <textarea placeholder="Your Message" class="w-full p-2 border border-gray-300 rounded" rows="4"></textarea>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="py-12 bg-blue-200" id="About">
+        <div class="max-w-7xl mx-auto text-center space-y-4 flex flex-col  ">
+            <h2 class="text-3xl font-bold">Ready to Start Your Learning Journey?</h2>
+            <p class="text-gray-600">Join LearnEase today and begin exploring a world of knowledge, anytime, anywhere.</p>
+            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Join Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 py-6"> 
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <p class="text-white">© 2025 LearnEase. All rights reserved.</p>
+            <div class="space-x-4">
+                <a href="#" class="text-white hover:text-gray-300">Privacy Policy</a>
+                <a href="#" class="text-white hover:text-gray-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+</create_file>
