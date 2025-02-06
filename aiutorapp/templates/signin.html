@@ -1,0 +1,36 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - LearnEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Sign In Section -->
+    <section class="py-20 bg-blue-100 flex-grow">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold">Welcome Back!</h2>
+            <p class="mt-4 text-lg">Please sign in to your account.</p>
+            <form class="mt-8 space-y-4">
+                <input type="email" placeholder="Email Address" class="w-full p-2 border border-gray-300 rounded" required>
+                <input type="password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded" required>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Sign In</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+</body>
+</html>

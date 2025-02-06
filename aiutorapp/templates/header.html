@@ -1,0 +1,20 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<header class="bg-blue-600 p-6">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <h1 class="text-white text-3xl font-bold">LearnEase</h1>
+        <nav class="space-x-4 flex items-center">
+            <a href="{% url 'indexpage' %}" class="text-white hover:text-gray-300">Home</a>
+            <a href="{% url 'courses' %}" class="text-white hover:text-gray-300">Courses</a>
+            <a href="{% url 'about' %}" class="text-white hover:text-gray-300">About</a>
+            <a href="{% url 'contact' %}" class="text-white hover:text-gray-300">Contact</a>
+            <div class="relative group">
+                <a href="{% url 'signup' %}" class="text-white hover:text-gray-300">SignUp</a>
+            </div>
+            <div class="relative group">
+                <a href="{% url 'signin' %}" class="text-white hover:text-gray-300">SignIn</a>
+            </div>
+        </nav>
+    </div>
+</header>

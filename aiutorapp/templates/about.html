@@ -1,0 +1,46 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - LearnEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- About Section -->
+    <section class="py-20 bg-blue-100 flex-grow">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold">About LearnEase</h2>
+            <p class="mt-4 text-lg">LearnEase is your AI-powered e-learning platform designed to help you unlock your potential through personalized learning experiences.</p>
+            <p class="mt-4">Our platform offers a variety of interactive courses and quizzes tailored to your learning style, ensuring that you achieve your goals efficiently.</p>
+            <h3 class="mt-8 text-2xl font-semibold">Our Mission</h3>
+            <p class="mt-2">To provide accessible and effective learning solutions that empower individuals to succeed in their educational journeys.</p>
+            <h3 class="mt-8 text-2xl font-semibold">Meet Our Team</h3>
+            <p class="mt-2">Our dedicated team of educators and technologists work tirelessly to create the best learning experiences for you.</p>
+            <h3 class="mt-8 text-2xl font-semibold">Testimonials</h3>
+            <p class="mt-2 italic">"LearnEase transformed my learning experience! The courses are engaging and tailored to my needs." - Happy Learner</p>
+            <p class="mt-2 italic">"I love the interactive quizzes! They really help reinforce what I've learned." - Satisfied Student</p>
+            <h3 class="mt-8 text-2xl font-semibold">Features</h3>
+            <ul class="mt-4 list-disc list-inside">
+                <li>Interactive Courses</li>
+                <li>Adaptive Quizzes</li>
+                <li>Progress Tracking</li>
+                <li>Personalized Learning Paths</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - LearnEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Courses Section -->
+    <section class="py-20 bg-blue-100 flex-grow">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold">Available Courses</h2>
+            <p class="mt-4 text-lg">Explore our wide range of courses designed to help you succeed.</p>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 1</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 1. This course covers the basics of...</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 2</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 2. This course dives deep into...</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">Course Title 3</h3>
+                    <p class="mt-2 text-gray-600">Description of Course 3. This course focuses on...</p>
+                </div>
+                <!-- Add more courses as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+</body>
+</html>

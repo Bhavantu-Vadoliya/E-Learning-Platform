@@ -7,62 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LearnEase - Your AI-Powered E-Learning Platform</title>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-       
-    </style>
-
-    <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     {% tailwind_css %}
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header class="bg-blue-600 p-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-white text-3xl font-bold">LearnEase</h1>
-            <nav class="space-x-4 flex items-center">
-                <a href="#Home" class="text-white hover:text-gray-300">Home</a>
-                <a href="#Courses" class="text-white hover:text-gray-300">Courses</a>
-                <a href="#About" class="text-white hover:text-gray-300">About</a>
-                <a href="#Contact" class="text-white hover:text-gray-300">Contact</a>
-                <script>
-                    console.log("JavaScript is executing");
-
-                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                        console.log("Anchor found:", anchor);
-
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        });
-                    });
-                    });
-                </script>
-
-                <div class="relative group">
-                    <a href="#SignUp" class="text-white hover:text-gray-300">SignUp</a>
-                    <ul class="absolute hidden group-hover:block bg-blue-600 space-y-2 mt-2 p-2 rounded shadow-lg group-hover:visible">
-                        <li><a href="#SignUpTeacher" class="text-white hover:text-gray-300 block px-4 py-2">Teacher</a></li>
-                        <li><a href="#SignUpStudent" class="text-white hover:text-gray-300 block px-4 py-2">Student</a></li>
-                    </ul>
-                </div>
-                <div class="relative group">
-                    <a href="#SignIn" class="text-white hover:text-gray-300">SignIn</a>
-                    <ul class="absolute hidden group-hover:block bg-blue-600 space-y-2 mt-2 p-2 rounded shadow-lg group-hover:visible">
-                        <li><a href="#SignInTeacher" class="text-white hover:text-gray-300 block px-4 py-2">Teacher</a></li>
-                        <li><a href="#SignInStudent" class="text-white hover:text-gray-300 block px-4 py-2">Student</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+    {% include 'header.html' %}
     
     <!-- Hero Section -->
     <section class="py-20 bg-blue-100" id="Home">
@@ -70,7 +22,7 @@
             <div class="md:w-1/2 text-center md:text-left space-y-4">
                 <h2 class="text-4xl md:text-5xl font-extrabold">Unlock Your Potential with AI-Powered Learning</h2>
                 <p class="text-gray-700 text-lg">LearnEase offers personalized courses and quizzes that adapt to your learning style, helping you achieve your goals efficiently.</p>
-                <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex flex-col items-center">Get Started</a>
+                <a href="{% url 'signup' %}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex flex-col items-center">Get Started</a>
             </div>
             <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
                 <img src="{% static 'Media/img1.jpeg' %}" alt="E-Learning Illustration" class="max-w-full h-auto">
@@ -143,7 +95,7 @@
         <div class="max-w-7xl mx-auto text-center space-y-4 flex flex-col ">
             <h2 class="text-3xl font-bold">Enroll Now</h2>
             <p class="text-gray-600">Join our courses and start learning today!</p>
-            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Enroll Now</a>
+            <a href="{% url 'signup' %}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Enroll Now</a>
         </div>
     </section>
 
@@ -165,20 +117,12 @@
         <div class="max-w-7xl mx-auto text-center space-y-4 flex flex-col  ">
             <h2 class="text-3xl font-bold">Ready to Start Your Learning Journey?</h2>
             <p class="text-gray-600">Join LearnEase today and begin exploring a world of knowledge, anytime, anywhere.</p>
-            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Join Now</a>
+            <a href="{% url 'signup' %}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Join Now</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 py-6"> 
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <p class="text-white">© 2025 LearnEase. All rights reserved.</p>
-            <div class="space-x-4">
-                <a href="#" class="text-white hover:text-gray-300">Privacy Policy</a>
-                <a href="#" class="text-white hover:text-gray-300">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
+    {% include 'footer.html' %}
 
 </body>
 </html>

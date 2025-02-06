@@ -3,17 +3,14 @@
 
 /* Custom styles for spacing and typography */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Keep custom font */
 }
 
+/* Refactor header and section title styles to use Tailwind utility classes */
 .header {
-    background-color: #1E3A8A;
-    color: white;
+    @apply bg-blue-800 text-white; /* Using Tailwind utility classes */
 }
 
 .section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #1E3A8A;
+    @apply text-2xl font-bold text-blue-800; /* Using Tailwind utility classes */
 }
-
