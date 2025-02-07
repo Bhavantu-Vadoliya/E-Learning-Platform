@@ -20,10 +20,23 @@
         <div class="max-w-7xl mx-auto text-center">
             <h2 class="text-4xl font-extrabold">Create Your Account</h2>
             <p class="mt-4 text-lg">Join us and start your learning journey!</p>
-            <form class="mt-8 space-y-4">
-                <input type="text" placeholder="Full Name" class="w-full p-2 border border-gray-300 rounded" required>
-                <input type="email" placeholder="Email Address" class="w-full p-2 border border-gray-300 rounded" required>
-                <input type="password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded" required>
+            <form method="POST" action="{% url 'signup' %}" class="mt-8 space-y-4">
+                {% csrf_token %}
+                <input type="text" name="full_name" placeholder="Full Name" class="w-full p-2 border border-gray-300 rounded" required>
+                <input type="email" name="email" placeholder="Email Address" class="w-full p-2 border border-gray-300 rounded" required>
+                <input type="password" name="password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded" required>
+
+                
+                <!-- User Type Selection -->
+                <div class="flex items-center justify-center">
+                    <label class="mr-4">
+                        <input type="radio" name="user_type" value="teacher" required> As Teacher
+                    </label>
+                    <label>
+                        <input type="radio" name="user_type" value="student" required> As Student
+                    </label>
+                </div>
+
                 <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Sign Up</button>
             </form>
         </div>
@@ -34,3 +47,5 @@
 
 </body>
 </html>
+
+
