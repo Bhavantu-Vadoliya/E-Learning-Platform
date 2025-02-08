@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
+    <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
@@ -14,30 +14,23 @@
     <main class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
         <section class="py-20 bg-blue-100">
             <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-4xl md:text-5xl font-extrabold">Welcome to Your Dashboard</h2>
-                <p class="text-gray-700 text-lg">Here you can access your courses and track your progress.</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold">Welcome to Your Teacher Dashboard</h2>
+                <p class="text-gray-700 text-lg">Here you can manage your courses and track student progress.</p>
             </div>
         </section>
         <section class="py-20 bg-blue-100">
             <div class="max-w-7xl mx-auto text-center space-y-4">
                 <h2 class="text-3xl font-bold">Your Features</h2>
                 <ul class="list-disc list-inside">
-                    <li>Access your enrolled courses</li>
-                    <li>Track your learning progress</li>
-                    <li>View your grades and feedback</li>
+                    <li>Manage your courses</li>
+                    <li>View student progress</li>
+                    <li>Provide feedback and grades</li>
                 </ul>
             </div>
         </section>
         <section class="py-20 bg-blue-100">
             <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Available Courses</h2>
-                <p class="text-gray-600">Here are the courses you are enrolled in:</p>
-                <!-- List of courses will be dynamically generated here -->
-            </div>
-        </section>
-        <section class="py-20 bg-blue-100">
-            <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Contact Us</h2>
+                <h2 class="text-3xl font-bold">Contact Support</h2>
                 <p class="text-gray-600">If you have any questions, feel free to reach out!</p>
             </div>
         </section>
@@ -46,6 +39,5 @@
     <footer>
         {% include 'footer.html' %}
     </footer>
-
 </body>
 </html>

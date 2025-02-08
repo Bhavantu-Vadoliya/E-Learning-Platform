@@ -10,11 +10,16 @@
             <a href="{% url 'about' %}" class="text-white hover:text-gray-300">About</a>
             <a href="{% url 'contact' %}" class="text-white hover:text-gray-300">Contact</a>
             <div class="relative group">
-                <a href="{% url 'signup' %}" class="text-white hover:text-gray-300">SignUp</a>
-            </div>
             <div class="relative group">
-                <a href="{% url 'signin' %}" class="text-white hover:text-gray-300">SignIn</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="text-white hover:text-gray-300">Logout</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="text-white hover:text-gray-300">SignUp</a>
+                    <a href="{% url 'signin' %}" class="text-white hover:text-gray-300">SignIn</a>
+                {% endif %}
             </div>
+
+
         </nav>
     </div>
 </header>

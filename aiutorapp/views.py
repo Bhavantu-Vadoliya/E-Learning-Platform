@@ -8,7 +8,8 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'user': request.user})  # Pass user context
+
 
 def courses(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
@@ -22,7 +23,9 @@ def about(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     return render(request, 'about.html')
 
-def student_dashboard(request):
+def student_dashboard(request):    
+    # Check if the user is a student
+
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     
     # Check if the user is a student
@@ -32,7 +35,26 @@ def student_dashboard(request):
         return redirect('indexpage')  # Redirect to index if not a student
 
 
+def teacher_dashboard(request):
+    logger.info(f"Request method: {request.method}, Path: {request.path}")
+    
+    # Check if the user is a student
+    if request.user.is_authenticated and request.user.user_type == 'teacher':
+        return render(request, 'teacher_dashboard.html')
+    else:
+        return redirect('indexpage')  # Redirect to index if not a student
+
+
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
+    return redirect('indexpage')  # Redirect to the index page after logout
+
+
 def signin(request):
+
+
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -44,7 +66,11 @@ def signin(request):
         if user is not None:
             login(request, user)  # Log the user in
             logger.info(f"User {user.username} signed in successfully.")
-            return redirect('student_dashboard')  # Redirect to the student dashboard
+            if user.user_type == 'student':
+                return redirect('student_dashboard')  # Redirect to the student dashboard
+            elif user.user_type == 'teacher':
+                return redirect('teacher_dashboard')  # Redirect to the teacher dashboard
+
         else:
             logger.warning("Invalid credentials.")
             return render(request, 'signin.html', {'error': 'Invalid username or password.'})
