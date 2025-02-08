@@ -20,12 +20,28 @@
         </section>
         <section class="py-20 bg-blue-100">
             <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Your Features</h2>
-                <ul class="list-disc list-inside">
-                    <li>Manage your courses</li>
-                    <li>View student progress</li>
-                    <li>Provide feedback and grades</li>
-                </ul>
+                <h2 class="text-3xl font-bold">Your Created Courses</h2>
+                <div>
+                    {% for course in created_courses %}
+                    <div>
+                        <h3>{{ course.name }}</h3>
+                        <p>{{ course.description }}</p>
+                    </div>
+                    {% empty %}
+                    <p>You have not created any courses yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="py-20 bg-blue-100">
+            <div class="max-w-7xl mx-auto text-center space-y-4">
+                <h2 class="text-3xl font-bold">Create a New Course</h2>
+                <form method="POST" action="{% url 'create_course' %}">
+                    {% csrf_token %}
+                    <input type="text" name="course_name" placeholder="Course Name" required>
+                    <textarea name="description" placeholder="Course Description" required></textarea>
+                    <button type="submit">Create Course</button>
+                </form>
             </div>
         </section>
         <section class="py-20 bg-blue-100">

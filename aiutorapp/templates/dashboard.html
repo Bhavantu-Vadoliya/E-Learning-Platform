@@ -1,51 +1,74 @@
+{% load static tailwind_tags %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% tailwind_css %}
 </head>
-<body>
-    <header>
-        {% include 'header.html' %}
-    </header>
-    <main class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
-        <section class="py-20 bg-blue-100">
-            <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-4xl md:text-5xl font-extrabold">Welcome to Your Dashboard</h2>
-                <p class="text-gray-700 text-lg">Here you can access your courses and track your progress.</p>
-            </div>
-        </section>
-        <section class="py-20 bg-blue-100">
-            <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Your Features</h2>
-                <ul class="list-disc list-inside">
-                    <li>Access your enrolled courses</li>
-                    <li>Track your learning progress</li>
-                    <li>View your grades and feedback</li>
-                </ul>
-            </div>
-        </section>
-        <section class="py-20 bg-blue-100">
-            <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Available Courses</h2>
-                <p class="text-gray-600">Here are the courses you are enrolled in:</p>
-                <!-- List of courses will be dynamically generated here -->
-            </div>
-        </section>
-        <section class="py-20 bg-blue-100">
-            <div class="max-w-7xl mx-auto text-center space-y-4">
-                <h2 class="text-3xl font-bold">Contact Us</h2>
-                <p class="text-gray-600">If you have any questions, feel free to reach out!</p>
-            </div>
-        </section>
-    </main>
+<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
 
-    <footer>
-        {% include 'footer.html' %}
-    </footer>
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Dashboard Section -->
+    <section class="py-20 bg-blue-100 flex-grow">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold">Welcome to Your Student Dashboard</h2>
+    <p class="mt-4 text-lg">Here you can enroll in available courses and view your enrolled courses.</p>
+
+    <!-- Available Courses Section -->
+    <div class="mt-8">
+        <h3 class="text-3xl font-bold">Courses Available for Enrollment</h3>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for course in available_courses %}
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold">{{ course.name }}</h4>
+                <p class="mt-2 text-gray-600">{{ course.description }}</p>
+                <form method="POST" action="{% url 'enroll_course' course.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Enroll</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Enrolled Courses Section -->
+    <div class="mt-8">
+        <h3 class="text-3xl font-bold">Your Enrolled Courses</h3>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for enrollment in enrolled_courses %}
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold">{{ enrollment.course.name }}</h4>
+                <p class="mt-2 text-gray-600">{{ enrollment.course.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for course in courses %}
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold">{{ course.name }}</h3>
+                    <p class="mt-2 text-gray-600">{{ course.description }}</p>
+                    <form method="POST" action="{% url 'enroll_course' course.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Enroll</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
 
 </body>
 </html>
