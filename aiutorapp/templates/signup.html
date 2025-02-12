@@ -37,7 +37,13 @@
                     </label>
                 </div>
 
+                <div class="flex items-center">
+                    <input type="checkbox" name="terms" id="terms" required>
+                    <label for="terms" class="ml-2">I agree to the <a href="{% url 'terms_of_service' %}" class="text-blue-600">Terms of Service</a> and <a href="{% url 'privacy_policy' %}" class="text-blue-600">Privacy Policy</a>.</label>
+                </div>
+                
                 <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Sign Up</button>
+
             </form>
         </div>
     </section>
@@ -47,5 +53,3 @@
 
 </body>
 </html>
-
-

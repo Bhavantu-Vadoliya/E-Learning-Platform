@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('dashboard/', views.student_dashboard, name='student_dashboard'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('terms-of-service/', views.terms_of_service, name='terms_of_service'),
+
     path('logout/', views.logout_view, name='logout'),  # Added logout URL
 
     path('teacher_dashboard/', views.teacher_dashboard, name='teacher_dashboard'),

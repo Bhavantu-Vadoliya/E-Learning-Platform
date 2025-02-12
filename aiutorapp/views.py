@@ -1,19 +1,23 @@
 import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from aiutorapp.models import CustomUser, Course, Enrollment  # Assuming Course is the model for courses
+from aiutorapp.models import CustomUser, Course, Enrollment, Contact  # Import the Contact model
+from django.http import HttpResponse  # Import HttpResponse for file downloads
+from django.shortcuts import get_object_or_404  # Import get_object_or_404 for fetching course
 
 # Set up logging
 logger = logging.getLogger(__name__)
 
 def index(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
-    return render(request, 'index.html', {'user': request.user})  # Pass user context
+    all_courses = Course.objects.all()  # Fetch all courses
+    return render(request, 'index.html', {'user': request.user, 'courses': all_courses})  # Pass user and courses context
 
 def courses(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     all_courses = Course.objects.all()  # Fetch all courses
-    return render(request, 'courses.html', {'courses': all_courses})
+    enrolled_courses = Enrollment.objects.filter(student=request.user).values_list('course', flat=True)  # Fetch enrolled course IDs
+    return render(request, 'courses.html', {'courses': all_courses, 'enrolled_courses': enrolled_courses})
 
 def enroll_course(request, course_id):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
@@ -37,13 +41,21 @@ def create_course(request):
     if request.method == 'POST':
         course_name = request.POST.get('course_name')
         description = request.POST.get('description')
+        file = request.FILES.get('file')  # Get the uploaded file
+        media_files = request.FILES.get('media_files')  # Get the uploaded media files
+        youtube_link = request.POST.get('youtube_link')  # Get the YouTube link
+
         teacher = request.user  # Assuming the user is a teacher
 
         # Create a new course instance
         new_course = Course.objects.create(
             name=course_name,
             description=description,
-            creator=teacher  # Assuming there's a creator field in the Course model
+            creator=teacher,  # Assuming there's a creator field in the Course model
+            file=file,  # Save the uploaded file
+            media_files=media_files,  # Save the uploaded media files
+            youtube_link=youtube_link  # Save the YouTube link
+
         )
         new_course.save()
         logger.info(f"Course created: {new_course.name} by {teacher.username}")
@@ -51,7 +63,21 @@ def create_course(request):
 
     return render(request, 'teacher_dashboard.html')  # Render the dashboard for GET requests
 
+from aiutorapp.models import Contact  # Import the Contact model
+
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        # Save the contact form data to the database
+        contact_entry = Contact(name=name, email=email, message=message)
+        contact_entry.save()  # Save the entry to the database
+        
+        logger.info(f"Contact form submitted by {name} ({email}): {message}")
+        return redirect('indexpage')  # Redirect to a thank you page or the index page
+
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     return render(request, 'contact.html')
 
@@ -59,14 +85,28 @@ def about(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     return render(request, 'about.html')
 
-def student_dashboard(request):    
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+def terms_of_service(request):
+    return render(request, 'terms_of_service.html')
+
+def student_dashboard(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     if request.user.is_authenticated and request.user.user_type == 'student':
         all_courses = Course.objects.all()  # Fetch all available courses
-        enrolled_courses = Enrollment.objects.filter(student=request.user).select_related('course')  # Fetch enrolled courses
+        enrolled_courses = Course.objects.filter(id__in=Enrollment.objects.filter(student=request.user).values_list('course', flat=True))  # Fetch enrolled course objects
+        
+        # # Pre-calculate enrollment status for each course
+        # enrollment_status = {
+        #     course.id: Enrollment.objects.filter(student=request.user, course=course).exists()
+        #     for course in all_courses
+        # }
+
         return render(request, 'dashboard.html', {
+            'user': request.user,
+            'enrolled_courses': enrolled_courses,
             'available_courses': all_courses,
-            'enrolled_courses': enrolled_courses
         })  # Pass both to the template
     else:
         return redirect('indexpage')  # Redirect to index if not a student
@@ -128,9 +168,5 @@ def signup(request):
         user.save()
         logger.info(f"User created: {user.username}, User Type: {user.user_type}")
         
-        return redirect('signin')  # Redirect to the signin page after successful signup
-
     return render(request, 'signup.html')
 
-def test_csrf(request):
-    logger.info(f"Request method: {request.method}, Path: {request.path}")

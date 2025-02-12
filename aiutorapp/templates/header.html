@@ -5,6 +5,8 @@
     <div class="max-w-7xl mx-auto flex justify-between items-center">
         <h1 class="text-white text-3xl font-bold">LearnEase</h1>
         <nav class="space-x-4 flex items-center">
+<p class="text-white text-lg">Welcome, {{ user.get_full_name }}</p>
+
             {% if user.is_authenticated and user.user_type == 'teacher' %}
                 <a href="{% url 'teacher_dashboard' %}" class="text-white hover:text-gray-300">Dashboard</a>
             {% elif user.is_authenticated and user.user_type == 'student' %}

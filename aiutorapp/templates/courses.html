@@ -27,6 +27,34 @@
                     <h3 class="text-xl font-semibold">{{ course.name }}</h3>
                     <p class="mt-2 text-gray-600">{{ course.description }}</p>
                     <p class="mt-2 text-gray-500">Created by: {{ course.creator.username }}</p>
+                        {% comment %}
+                        {% if course.file %}
+                            {% if user.is_authenticated %}
+                                {% if enrolled_course_name == course.name or user.user_type == 'teacher' %}
+                                    <p class="mt-2 text-gray-500">File: <a href="{{ course.file.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Download</a></p>
+                                {% else %}
+                                    <p class="mt-2 text-gray-500">File: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                                {% endif %}
+                            {% else %}
+                                <p class="mt-2 text-gray-500">File: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if course.media_files %}
+                            {% if user.is_authenticated %}
+                                <p class="mt-2 text-gray-500">File: <a href="{{ course.media_files.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Download</a></p>                                
+                            {% else %}
+                                <p class="mt-2 text-gray-500">File: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if course.youtube_link %}
+                        {% if user.is_authenticated %}
+                            <p class="mt-2 text-gray-500">File: <a href="{{ course.youtube_link.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Download</a></p>                                
+                        {% else %}
+                            <p class="mt-2 text-gray-500">File: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                        {% endif %}
+                        {% endif %} {% endcomment %}
                 </div>
                 {% endfor %}
             </div>
