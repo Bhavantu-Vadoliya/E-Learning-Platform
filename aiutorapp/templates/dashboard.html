@@ -11,71 +11,55 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     {% tailwind_css %}
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
     <!-- Header -->
     {% include 'header.html' %}
 
-    <!-- Dashboard Section -->
-    <section class="py-20 bg-blue-100 flex-grow">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold">Welcome to Your Student Dashboard</h2>
-            <p class="mt-4 text-lg">Here you can enroll in available courses and view your enrolled courses.</p>
+    <!-- Main Dashboard Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <section class="bg-white p-8 rounded-lg shadow mb-8">
+            <h1 class="text-3xl font-bold text-blue-600 mb-4">Welcome Back!</h1>
+            <p class="text-lg">Here you can manage your courses and track your progress.</p>
+        </section>
 
-            <!-- Available Courses Section -->
-            {% comment %} <div class="mt-8">
-                <h3 class="text-3xl font-bold">Courses Available for Enrollment</h3>
-                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {% for course in available_courses %}
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h4 class="text-xl font-semibold">{{ course.name }}</h4>
-                        <p class="mt-2 text-gray-600">{{ course.description }}</p>
-                        <form method="POST" action="{% url 'enroll_course' course.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Enroll</button>
-                        </form>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div> {% endcomment %}
-
-            <!-- Enrolled Courses Section -->
-            <div class="mt-8">
-                <h3 class="text-3xl font-bold">Your Enrolled Courses</h3>
-                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {% for course in enrolled_courses %}
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h4 class="text-xl font-semibold">{{ course.name }}</h4>
-                        <p class="mt-2 text-gray-600">{{ course.description }}</p><br>
+        <!-- Enrolled Courses Section -->
+        <section class="bg-white p-8 rounded-lg shadow">
+            <h2 class="text-2xl font-bold text-blue-600 mb-6">Your Enrolled Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for course in enrolled_courses %}
+                <div class="bg-gray-100 p-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold">{{ course.name }}</h4>
+                    <p class="mt-2 text-gray-600">{{ course.description }}</p>
+                    <div class="mt-4">
                         {% if course.file %}
                             {% if user.is_authenticated %}
-                                <br><p class="mt-2 text-gray-500">PDFs: <a href="{{ course.file.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Download</a></p>                                
+                                <p class="mt-2 text-gray-500">PDF: <a href="{{ course.file.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Download</a></p>
                             {% else %}
-                                <p class="mt-2 text-gray-500">PDFs: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                                <p class="mt-2 text-gray-500">PDF: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
                             {% endif %}
                         {% endif %}
                         {% if course.media_files %}
                             {% if user.is_authenticated %}
-                        <br><p class="mt-2 text-gray-500">Media File: <a href="{{ course.media_files.url }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" target="_blank">Access Media File</a></p>
-
+                                <p class="mt-2 text-gray-500">Media: <a href="{{ course.media_files.url }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Access Media</a></p>
                             {% else %}
-                                <p class="mt-2 text-gray-500">MediaFile: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                                <p class="mt-2 text-gray-500">Media: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Access (Enroll to access)</button></p>
                             {% endif %}
                         {% endif %}
                         {% if course.youtube_link %}
-                        {% if user.is_authenticated %}
-                        <br><p class="mt-2 text-gray-500">YouTube Link: <a href="{{ course.youtube_link }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" target="_blank">Watch Video</a></p>
-
-                        {% else %}
-                            <p class="mt-2 text-gray-500">Links: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Download (Enroll to access)</button></p>
+                            {% if user.is_authenticated %}
+                                <p class="mt-2 text-gray-500">YouTube: <a href="{{ course.youtube_link }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" target="_blank">Watch Video</a></p>
+                            {% else %}
+                                <p class="mt-2 text-gray-500">YouTube: <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Access (Enroll to access)</button></p>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     {% include 'footer.html' %}
