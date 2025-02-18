@@ -16,7 +16,8 @@ def index(request):
 def courses(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     all_courses = Course.objects.all()  # Fetch all courses
-    enrolled_courses = Enrollment.objects.filter(student=request.user).values_list('course', flat=True)  # Fetch enrolled course IDs
+    enrolled_courses = Enrollment.objects.filter(student=request.user.id).values_list('course', flat=True) if request.user.is_authenticated else []  # Fetch enrolled course IDs for authenticated users
+
     return render(request, 'courses.html', {'courses': all_courses, 'enrolled_courses': enrolled_courses})
 
 def enroll_course(request, course_id):
@@ -169,4 +170,3 @@ def signup(request):
         logger.info(f"User created: {user.username}, User Type: {user.user_type}")
         
     return render(request, 'signup.html')
-

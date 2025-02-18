@@ -27,7 +27,15 @@
                     <h3 class="text-xl font-semibold">{{ course.name }}</h3>
                     <p class="mt-2 text-gray-600">{{ course.description }}</p>
                     <p class="mt-2 text-gray-500">Created by: {{ course.creator.username }}</p>
-                        {% comment %}
+                    <form method="POST" action="{% url 'enroll_course' course.id %}">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Enroll</button>
+                        {% else %}
+                            <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Enroll (Signin to access)</button>
+                    {% endif %}
+                    </form>
+                        {% comment %} 
                         {% if course.file %}
                             {% if user.is_authenticated %}
                                 {% if enrolled_course_name == course.name or user.user_type == 'teacher' %}

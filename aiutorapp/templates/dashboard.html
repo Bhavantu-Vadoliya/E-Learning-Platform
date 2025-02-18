@@ -23,7 +23,7 @@
             <p class="mt-4 text-lg">Here you can enroll in available courses and view your enrolled courses.</p>
 
             <!-- Available Courses Section -->
-            <div class="mt-8">
+            {% comment %} <div class="mt-8">
                 <h3 class="text-3xl font-bold">Courses Available for Enrollment</h3>
                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
                     {% for course in available_courses %}
@@ -37,7 +37,7 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
+            </div> {% endcomment %}
 
             <!-- Enrolled Courses Section -->
             <div class="mt-8">
