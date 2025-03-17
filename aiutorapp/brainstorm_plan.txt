@@ -1,0 +1,5 @@
+### Plan:
+
+1. **Update `admin.py`**:
+   - Modify the `EnrollmentAdmin` class to change the `list_display` to show the full name of the student instead of the username. This will involve creating a method to return the full name.
+

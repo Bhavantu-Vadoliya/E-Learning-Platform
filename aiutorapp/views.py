@@ -10,8 +10,16 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
+    
+    if request.user.is_authenticated:
+        if request.user.user_type == 'student':
+            return redirect('student_dashboard')  # Redirect to student dashboard
+        elif request.user.user_type == 'teacher':
+            return redirect('teacher_dashboard')  # Redirect to teacher dashboard
+    
     all_courses = Course.objects.all()  # Fetch all courses
     return render(request, 'index.html', {'user': request.user, 'courses': all_courses})  # Pass user and courses context
+
 
 def courses(request):
     logger.info(f"Request method: {request.method}, Path: {request.path}")
@@ -112,11 +120,26 @@ def student_dashboard(request):
     else:
         return redirect('indexpage')  # Redirect to index if not a student
 
+def view_enrolled_students(request, course_id):
+    logger.info(f"Request method: {request.method}, Path: {request.path}")
+    course = get_object_or_404(Course, id=course_id)  # Fetch the course
+    enrolled_students = Enrollment.objects.filter(course=course).select_related('student')  # Get enrolled students
+
+    return render(request, 'enrolled_students.html', {
+        'course': course,
+        'enrolled_students': enrolled_students
+    })
+
 def teacher_dashboard(request):
+
     logger.info(f"Request method: {request.method}, Path: {request.path}")
     if request.user.is_authenticated and request.user.user_type == 'teacher':
         created_courses = Course.objects.filter(creator=request.user)  # Fetch courses created by the teacher
-        return render(request, 'teacher_dashboard.html', {'created_courses': created_courses})
+        return render(request, 'teacher_dashboard.html', {
+            'created_courses': created_courses,
+            'view_enrolled_students_url': 'view_enrolled_students'  # Add URL for viewing enrolled students
+        })
+
     else:
         return redirect('indexpage')  # Redirect to index if not a teacher
 

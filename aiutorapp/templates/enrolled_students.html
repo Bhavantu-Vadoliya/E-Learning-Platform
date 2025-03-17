@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolled Students - {{ course.name }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Students Enrolled in {{ course.name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Enrollment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrolled_students %}
+                <tr>
+                    <td>{{ enrollment.student.username }}</td>
+                    <td>{{ enrollment.student.email }}</td>
+                    <td>{{ enrollment.enrolled_at }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No students enrolled in this course.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'teacher_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

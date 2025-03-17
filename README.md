@@ -1,10 +1,20 @@
-# Project Title
+# E-Learning Platform
 
 ## About
 This project is a Django application designed to provide users with a platform for interacting with various features. It aims to facilitate learning and engagement through a user-friendly interface.
 
 ## Description
-This project is a Django application that serves as a platform for users to interact with various features.
+This project serves as a platform for users to interact with various features, including course management, user authentication, and dashboards for both students and teachers.
+
+## Features
+- **User Authentication**: Users can sign up, log in, and log out. The application supports different user types (students and teachers).
+- **Course Management**: Teachers can create courses, and students can enroll in them. The application allows users to view all available courses and their enrollment status.
+- **Dashboards**: Separate dashboards for students and teachers provide tailored experiences based on user type.
+- **Contact Form**: Users can submit inquiries through a contact form.
+- **Logging**: The application includes logging for various actions, aiding in debugging and monitoring.
+
+## Frontend Technology
+- **Tailwind CSS**: The project utilizes Tailwind CSS for styling, allowing for rapid UI development.
 
 ## Prerequisites
 - Python 3.x
@@ -29,7 +39,7 @@ This project is a Django application that serves as a platform for users to inte
    ```bash
    pip install -r requirements.txt
    ```
-4. **Install Node.js dependencies** (if applicable):
+4. **Install Node.js dependencies**:
    ```bash
    cd theme/static_src
    npm install

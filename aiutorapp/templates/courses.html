@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+z{% load static tailwind_tags %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -29,11 +29,9 @@
                     <p class="mt-2 text-gray-500">Created by: {{ course.creator.username }}</p>
                     <form method="POST" action="{% url 'enroll_course' course.id %}">
                         {% csrf_token %}
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.user_type != 'teacher' %}
                             <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Enroll</button>
-                        {% else %}
-                            <button class="bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed" disabled>Enroll (Signin to access)</button>
-                    {% endif %}
+                        {% endif %}
                     </form>
                         {% comment %} 
                         {% if course.file %}

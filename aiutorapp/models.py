@@ -16,11 +16,10 @@ class Course(models.Model):
     file = models.FileField(upload_to='course_files/', blank=True, null=True)  # Field for uploading course files
     media_files = models.FileField(upload_to='media_files/', blank=True, null=True)  # Field for uploading multiple media files
     youtube_link = models.URLField(blank=True, null=True)  # Field for storing YouTube video link
-
-
-
+    
     def __str__(self):
-        return f"{self.creator.username}  in {self.name}"
+        return f"{self.name} by {self.creator.first_name}"
+
 
 class Enrollment(models.Model):
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Link to the student

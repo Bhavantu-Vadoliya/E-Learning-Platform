@@ -1,7 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+
 from . import views
+from aiutorapp.views import view_enrolled_students  # Import the view_enrolled_students function
+
 
 urlpatterns = [
+    path('view_enrolled_students/<int:course_id>/', views.view_enrolled_students, name='view_enrolled_students'),  # Add URL for viewing enrolled students
+
+
     path('dashboard/', views.student_dashboard, name='student_dashboard'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('terms-of-service/', views.terms_of_service, name='terms_of_service'),
